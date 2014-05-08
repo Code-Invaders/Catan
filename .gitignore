@@ -3,6 +3,7 @@
 [Oo]bj/
 *.suo
 *.user
-[Pp]ackages/*.dat
+[Pp]ackages/
+*.dat
 *.version
 *.crc
