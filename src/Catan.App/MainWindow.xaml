@@ -7,10 +7,14 @@
         xmlns:app="clr-namespace:Catan.App" xmlns:system="clr-namespace:System;assembly=mscorlib" mc:Ignorable="d"
         d:DataContext="{d:DesignInstance app:MainBoardViewModel}">
     <Grid>
-        <ItemsControl ItemsSource="{Binding Tiles}" VerticalAlignment="Center" HorizontalAlignment="center" Grid.Row="1">
+        <ItemsControl ItemsSource="{Binding Tiles}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Row="1">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Label Content="{Binding Resource}" />
+                    <Grid>
+                        <Border BorderBrush="Black" BorderThickness="3" Background="Beige">
+                            <Label Content="{Binding Resource}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Border>
+                    </Grid>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
             <ItemsControl.ItemsPanel>
