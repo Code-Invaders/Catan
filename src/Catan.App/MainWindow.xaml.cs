@@ -23,6 +23,41 @@ namespace Catan.App
         public MainWindow()
         {
             InitializeComponent();
+
+            DataContext = new MainBoardViewModel();
         }
+    }
+
+    public class MainBoardViewModel
+    {
+        public IEnumerable<TileViewModel> Tiles
+        {
+            get
+            {
+                yield return new TileViewModel { Resource = Resource.Brick};;
+                yield return new TileViewModel { Resource = Resource.Grain};;
+                yield return new TileViewModel { Resource = Resource.Sheep};;
+                yield return new TileViewModel { Resource = Resource.Wood};;
+                yield return new TileViewModel { Resource = Resource.Ore};;
+                yield return new TileViewModel { Resource = Resource.Brick};;
+                yield return new TileViewModel { Resource = Resource.Grain};;
+                yield return new TileViewModel { Resource = Resource.Brick};;
+                yield return new TileViewModel { Resource = Resource.Wood};;
+            }
+        } 
+    }
+
+    public class TileViewModel
+    {
+        public Resource Resource { get; set; }
+    }
+
+    public enum Resource
+    {
+        Brick,
+        Grain,
+        Sheep,
+        Wood,
+        Ore
     }
 }
