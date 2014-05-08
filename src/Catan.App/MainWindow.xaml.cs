@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using CodeInvaders.Catan.App;
 
 namespace Catan.App
 {
@@ -24,31 +25,29 @@ namespace Catan.App
         {
             InitializeComponent();
 
-            DataContext = new MainBoardViewModel();
+
+
+            DataContext = new MainBoardViewModel(new TileFactory().GetTiles(9));
         }
     }
 
     public class MainBoardViewModel
     {
-        public IEnumerable<TileViewModel> Tiles
+        public IEnumerable<TileViewModel> Tiles { get; set; }
+
+        public MainBoardViewModel(IEnumerable<TileViewModel> tiles )
         {
-            get
-            {
-                yield return new TileViewModel { Resource = Resource.Brick};;
-                yield return new TileViewModel { Resource = Resource.Grain};;
-                yield return new TileViewModel { Resource = Resource.Sheep};;
-                yield return new TileViewModel { Resource = Resource.Wood};;
-                yield return new TileViewModel { Resource = Resource.Ore};;
-                yield return new TileViewModel { Resource = Resource.Brick};;
-                yield return new TileViewModel { Resource = Resource.Grain};;
-                yield return new TileViewModel { Resource = Resource.Brick};;
-                yield return new TileViewModel { Resource = Resource.Wood};;
-            }
-        } 
+            Tiles = tiles;
+        }
     }
 
     public class TileViewModel
     {
+        public TileViewModel(Resource next)
+        {
+            Resource = next;
+        }
+
         public Resource Resource { get; set; }
     }
 
