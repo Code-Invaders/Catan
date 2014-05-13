@@ -9,8 +9,17 @@ namespace CodeInvaders.Catan.App
 
         private Random random = new Random();
 
+        private Stack<Chit> chits;
+
+        public TileFactory(IEnumerable<Chit> chits)
+        {
+            this.chits = new Stack<Chit>(chits);
+        }
+
+
         public IEnumerable<TileViewModel> GetTiles(int i)
         {
+            
             do
             {
                 yield return MakeRandomTile();
@@ -23,7 +32,7 @@ namespace CodeInvaders.Catan.App
             
             var next = random.Next(0, Enum.GetValues(typeof(Resource)).Length - 1);
 
-            return new TileViewModel((Resource) next);
+            return new TileViewModel((Resource) next, chits.Pop());
         }
     }
 }

@@ -27,7 +27,7 @@ namespace Catan.App
 
 
 
-            DataContext = new MainBoardViewModel(new TileFactory().GetTiles(9));
+            DataContext = new MainBoardViewModel(new TileFactory(new ChitFactory(10).StandardOrderedNumberSet).GetTiles(9));
         }
     }
 
@@ -35,7 +35,7 @@ namespace Catan.App
     {
         public IEnumerable<TileViewModel> Tiles { get; set; }
 
-        public MainBoardViewModel(IEnumerable<TileViewModel> tiles )
+        public MainBoardViewModel(IEnumerable<TileViewModel> tiles)
         {
             Tiles = tiles;
         }
@@ -43,12 +43,14 @@ namespace Catan.App
 
     public class TileViewModel
     {
-        public TileViewModel(Resource next)
+        public TileViewModel(Resource next, Chit chit)
         {
             Resource = next;
+            Chit = chit;
         }
 
         public Resource Resource { get; set; }
+        public Chit Chit { get; set; }
     }
 
     public enum Resource

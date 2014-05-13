@@ -13,7 +13,7 @@ namespace Catan.Tests
         [Test]
         public void should_get_9_new_tiles()
         {
-            var tileFactory = new TileFactory();
+            var tileFactory = new TileFactory(Enumerable.Range(1, 9).Select(x => new Chit(x)));
 
             var result = tileFactory.GetTiles(9);
 
@@ -22,7 +22,7 @@ namespace Catan.Tests
         [Test]
         public void should_not_all_be_the_same_type()
         {
-            var tileFactory = new TileFactory();
+            var tileFactory = new TileFactory(Enumerable.Range(1, 9).Select(x => new Chit(x)));
 
             var result = tileFactory.GetTiles(9);
 

@@ -50,8 +50,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="When_playing_with_tiles.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="When_Using_Random_numbers.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Catan.App\Catan.App.csproj">

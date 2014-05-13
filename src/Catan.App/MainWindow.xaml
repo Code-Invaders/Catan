@@ -10,11 +10,16 @@
         <ItemsControl ItemsSource="{Binding Tiles}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Row="1">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Grid>
-                        <Border BorderBrush="Black" BorderThickness="3" Background="Beige">
+                    <Border BorderBrush="Black" BorderThickness="3" Background="Beige">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
                             <Label Content="{Binding Resource}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                        </Border>
-                    </Grid>
+                            <Label Content="{Binding Path=Chit.IdentifyingNumber}" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1"/>
+                        </Grid>
+                    </Border>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
             <ItemsControl.ItemsPanel>
