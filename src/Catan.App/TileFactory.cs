@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Catan.App;
 
 namespace CodeInvaders.Catan.App
 {
