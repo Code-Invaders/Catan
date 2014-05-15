@@ -7,15 +7,25 @@
         xmlns:app="clr-namespace:Catan.App" xmlns:system="clr-namespace:System;assembly=mscorlib"
         xmlns:App="clr-namespace:CodeInvaders.Catan.App" mc:Ignorable="d"
         d:DataContext="{d:DesignInstance app:MainBoardViewModel}">
+    <Window.Resources>
+        <App:ResourceToColorConverter x:Key="ResourceToColorConverter"/>
+    </Window.Resources>
     <Window.CommandBindings>
         <CommandBinding Command="app:GameCommands.NewGame" Executed="StartNewGame" />
+        <CommandBinding Command="app:GameCommands.NextTurn" Executed="ChangeTurn" />
     </Window.CommandBindings>
-        <StackPanel>
+    <StackPanel Width="931">
         <Button Margin="10" Command="app:GameCommands.NewGame">Start</Button>
-    <Grid>
-        <Grid.Resources>
-            <App:ResourceToColorConverter x:Key="ResourceToColorConverter"/>
-        </Grid.Resources>
+        <Grid Margin="154,0,213,0">
+            <Border BorderBrush="Black" BorderThickness="10" Margin="138,0"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Label Margin="10">Player 1</Label>
+                <Label Margin="10">Player 2</Label>
+                <Label Margin="10">Player 3</Label>
+                <Label Margin="10">Player 4</Label>
+            </StackPanel>
+        </Grid>
+
         <ItemsControl ItemsSource="{Binding Tiles}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Row="1">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
@@ -28,7 +38,7 @@
                             <Label Content="{Binding Resource}" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                             <Label Content="{Binding Path=Chit.IdentifyingNumber}" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1"/>
                         </Grid>
-                        </Border>
+                    </Border>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
             <ItemsControl.ItemsPanel>
@@ -38,8 +48,6 @@
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>
-    </Grid>
-
+    <Button Margin="10" Command="app:GameCommands.NextTurn">Next turn</Button>
     </StackPanel>
-
 </Window>

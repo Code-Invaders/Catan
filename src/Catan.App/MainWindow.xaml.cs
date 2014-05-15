@@ -31,11 +31,18 @@ namespace Catan.App
         {
             DataContext = new MainBoardViewModel(new TileFactory(new ChitFactory(10).StandardOrderedNumberSet).GetTiles(9));
         }
+
+        private void ChangeTurn(object sender, ExecutedRoutedEventArgs e)
+        {
+            DataContext = new MainBoardViewModel(new TileFactory(new ChitFactory(10).StandardOrderedNumberSet).GetTiles(9));
+        }
     }
 
     public static class GameCommands
     {
         public static readonly RoutedUICommand NewGame = new RoutedUICommand("New Game", "NewGame", typeof(MainWindow));
+
+        public static readonly RoutedUICommand NextTurn = new RoutedUICommand("Next Turn", "NextTurn",typeof(MainWindow));
     }
 
     public class MainBoardViewModel
