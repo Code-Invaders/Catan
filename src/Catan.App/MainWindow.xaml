@@ -6,8 +6,12 @@
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:app="clr-namespace:Catan.App" xmlns:system="clr-namespace:System;assembly=mscorlib" mc:Ignorable="d"
         d:DataContext="{d:DesignInstance app:MainBoardViewModel}">
-    <Grid>
-        <ItemsControl ItemsSource="{Binding Tiles}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Row="1">
+    <Window.CommandBindings>
+        <CommandBinding Command="app:GameCommands.NewGame" Executed="StartNewGame" />
+    </Window.CommandBindings>
+        <StackPanel>
+        <Button Margin="10" Command="app:GameCommands.NewGame">Start</Button>
+            <ItemsControl ItemsSource="{Binding Tiles}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Row="1">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Border BorderBrush="Black" BorderThickness="3" Background="Beige">
@@ -16,7 +20,7 @@
                                 <RowDefinition />
                                 <RowDefinition />
                             </Grid.RowDefinitions>
-                            <Label Content="{Binding Resource}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                             <Label Content="{Binding Resource}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                             <Label Content="{Binding Path=Chit.IdentifyingNumber}" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1"/>
                         </Grid>
                     </Border>
@@ -29,24 +33,6 @@
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>
-        <!--<Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <Label Content="Wood" VerticalAlignment="Center" HorizontalAlignment="Center" />
-        <Label Content="Quary" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1" />
-        <Label Content="Farm" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="2" />
-        <Label Content="Wood" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" />
-        <Label Content="Quary" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="1" />
-        <Label Content="Farm" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="2" Grid.Row="1" />
-        <Label Content="Wood" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="2" />
-        <Label Content="Quary" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="2" />
-        <Label Content="Farm" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="2"  Grid.Row="2" />-->
-    </Grid>
+        </StackPanel>
+    
 </Window>
