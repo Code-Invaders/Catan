@@ -24,9 +24,6 @@ namespace Catan.App
         public MainWindow()
         {
             InitializeComponent();
-
-
-
             DataContext = new MainBoardViewModel(new TileFactory(new ChitFactory(10).StandardOrderedNumberSet).GetTiles(9));
         }
 
