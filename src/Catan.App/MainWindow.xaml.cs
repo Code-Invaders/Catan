@@ -12,17 +12,29 @@ namespace CodeInvaders.Catan.App
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new MainBoardViewModel(new TileFactory(new ChitFactory(10).StandardOrderedNumberSet).GetTiles(9));
+
+            InitializeModel();
+        }
+
+        private void InitializeModel()
+        {
+            IEnumerable<TileViewModel> tileViewModels = new TileFactory(new ChitFactory(10).StandardOrderedNumberSet).GetTiles(9);
+
+            IEnumerable<PlayerViewModel> playerViewModels = new[]
+                {new PlayerViewModel("Player 1"), new PlayerViewModel("Player 2")};
+
+
+            DataContext = new MainBoardViewModel(tileViewModels, playerViewModels);
         }
 
         private void StartNewGame(object sender, ExecutedRoutedEventArgs e)
         {
-            DataContext = new MainBoardViewModel(new TileFactory(new ChitFactory(10).StandardOrderedNumberSet).GetTiles(9));
+            InitializeModel();
         }
 
         private void ChangeTurn(object sender, ExecutedRoutedEventArgs e)
         {
-            DataContext = new MainBoardViewModel(new TileFactory(new ChitFactory(10).StandardOrderedNumberSet).GetTiles(9));
+            InitializeModel();
         }
     }
 
@@ -37,9 +49,25 @@ namespace CodeInvaders.Catan.App
     {
         public IEnumerable<TileViewModel> Tiles { get; set; }
 
-        public MainBoardViewModel(IEnumerable<TileViewModel> tiles)
+        public IEnumerable<PlayerViewModel> Players { get; set; }
+
+        public MainBoardViewModel(IEnumerable<TileViewModel> tiles, IEnumerable<PlayerViewModel> players)
         {
             Tiles = tiles;
+            Players = players;
+            
+        }
+    }
+
+    public class PlayerViewModel
+    {
+        public int Score { get; set; }
+
+        public string Name { get; set; }
+
+        public PlayerViewModel(string name)
+        {
+            Name = name;
         }
     }
 

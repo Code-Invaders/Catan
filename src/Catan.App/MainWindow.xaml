@@ -13,17 +13,30 @@
         <CommandBinding Command="app:GameCommands.NewGame" Executed="StartNewGame" />
         <CommandBinding Command="app:GameCommands.NextTurn" Executed="ChangeTurn" />
     </Window.CommandBindings>
+    
     <StackPanel Width="931">
         <Button Margin="10" Command="app:GameCommands.NewGame">Start</Button>
-        <Grid Margin="154,0,213,0">
-            <Border BorderBrush="Black" BorderThickness="10" Margin="138,0"/>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Label Margin="10">Player 1</Label>
-                <Label Margin="10">Player 2</Label>
-                <Label Margin="10">Player 3</Label>
-                <Label Margin="10">Player 4</Label>
-            </StackPanel>
-        </Grid>
+
+        <ItemsControl ItemsSource="{Binding Players}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="Black" BorderThickness="3">
+                        <StackPanel>
+                            <Label HorizontalAlignment="Center" Content="{Binding Name}" />
+                            <VirtualizingStackPanel Orientation="Horizontal">
+                                <Label>Score:</Label>
+                                <Label Content="{Binding Score}"/>
+                            </VirtualizingStackPanel>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <VirtualizingStackPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
 
         <ItemsControl ItemsSource="{Binding Tiles}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Row="1">
             <ItemsControl.ItemTemplate>
