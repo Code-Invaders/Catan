@@ -21,7 +21,7 @@ namespace CodeInvaders.Catan.App
             IEnumerable<TileViewModel> tileViewModels = new TileFactory(new ChitFactory(10).StandardOrderedNumberSet).GetTiles(9);
 
             IEnumerable<PlayerViewModel> playerViewModels = new[]
-                {new PlayerViewModel("Player 1"), new PlayerViewModel("Player 2")};
+                {new PlayerViewModel("Player 1"){ IsActive=true}, new PlayerViewModel("Player 2")};
 
 
             DataContext = new MainBoardViewModel(tileViewModels, playerViewModels);
@@ -34,7 +34,6 @@ namespace CodeInvaders.Catan.App
 
         private void ChangeTurn(object sender, ExecutedRoutedEventArgs e)
         {
-            InitializeModel();
         }
     }
 
@@ -55,7 +54,6 @@ namespace CodeInvaders.Catan.App
         {
             Tiles = tiles;
             Players = players;
-            
         }
     }
 
@@ -64,6 +62,8 @@ namespace CodeInvaders.Catan.App
         public int Score { get; set; }
 
         public string Name { get; set; }
+
+        public bool IsActive { get; set; }
 
         public PlayerViewModel(string name)
         {

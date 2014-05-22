@@ -8,6 +8,7 @@
         d:DataContext="{d:DesignInstance app:MainBoardViewModel}">
     <Window.Resources>
         <app:ResourceToColorConverter x:Key="ResourceToColorConverter"/>
+        <app:ActivePlayerToColorConverter x:Key="ActivePlayerToColorConverter"/>
     </Window.Resources>
     <Window.CommandBindings>
         <CommandBinding Command="app:GameCommands.NewGame" Executed="StartNewGame" />
@@ -20,7 +21,7 @@
         <ItemsControl ItemsSource="{Binding Players}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Border BorderBrush="Black" BorderThickness="3">
+                    <Border BorderBrush="{Binding Converter={StaticResource ResourceKey=ActivePlayerToColorConverter}}" BorderThickness="3">
                         <StackPanel>
                             <Label HorizontalAlignment="Center" Content="{Binding Name}" />
                             <VirtualizingStackPanel Orientation="Horizontal">
