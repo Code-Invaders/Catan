@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Windows.Media;
 using CodeInvaders.Catan.App;
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace CodeInvaders.Catan.Tests
+namespace CodeInvaders.Catan.Tests.App
 {
     [TestFixture]
     internal class When_converting_Resources_To_colors

@@ -53,9 +53,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ChitFactory.cs" />
-    <Compile Include="TileFactory.cs" />
+    <Compile Include="MainBoardViewModel.cs" />
+    <Compile Include="PlayerViewModel.cs" />
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="ResourceToColorConverter.cs" />
+    <Compile Include="TileViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -95,6 +97,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Catan.Core\Catan.Core.csproj">
+      <Project>{B5FEB8B5-1B9E-4C24-8710-D97D9334A949}</Project>
+      <Name>Catan.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

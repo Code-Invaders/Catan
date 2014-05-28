@@ -39,7 +39,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Chit.cs" />
+    <Compile Include="ChitSetFactory.cs" />
+    <Compile Include="GameEngine.cs" />
+    <Compile Include="IChitSetFactory.cs" />
+    <Compile Include="ITileSetFactory.cs" />
+    <Compile Include="Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resource.cs" />
+    <Compile Include="Tile.cs" />
+    <Compile Include="TileSetFactory.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
