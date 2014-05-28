@@ -26,7 +26,7 @@ namespace CodeInvaders.Catan
 
         private Tile MakeRandomTile(Chit chit)
         {
-            var next = random.Next(0, Enum.GetValues(typeof(Resource)).Length - 1);
+            var next = random.Next(0, Enum.GetValues(typeof(Resource)).Length);
 
             return new Tile((Resource)next, chit);
         }
