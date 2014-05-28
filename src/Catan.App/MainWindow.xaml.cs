@@ -1,5 +1,4 @@
 ﻿using System.Windows;
-using System.Windows.Input;
 
 namespace CodeInvaders.Catan.App
 {
@@ -21,27 +20,5 @@ namespace CodeInvaders.Catan.App
 
             DataContext = new MainBoardViewModel(gameEngine);
         }
-
-        private MainBoardViewModel Model
-        {
-            get { return (MainBoardViewModel) DataContext; }
-        }
-
-        private void StartNewGame(object sender, ExecutedRoutedEventArgs e)
-        {
-            Model.StartNewGame();
-        }
-
-        private void ChangeTurn(object sender, ExecutedRoutedEventArgs e)
-        {
-            Model.NextTurn();
-        }
-    }
-
-    public static class GameCommands
-    {
-        public static readonly RoutedUICommand NewGame = new RoutedUICommand("New Game", "NewGame", typeof(MainWindow));
-
-        public static readonly RoutedUICommand NextTurn = new RoutedUICommand("Next Turn", "NextTurn",typeof(MainWindow));
     }
 }

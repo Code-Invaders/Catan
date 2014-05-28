@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Windows.Input;
 using CodeInvaders.Catan.App.Annotations;
 
 namespace CodeInvaders.Catan.App
@@ -16,15 +18,23 @@ namespace CodeInvaders.Catan.App
         public MainBoardViewModel(GameEngine gameEngine)
         {
             this.gameEngine = gameEngine;
+
+            StartNewGameCommand = new RelayCommand<MainBoardViewModel>(x => StartNewGame());
+
+            NextTurnCommand = new RelayCommand<MainBoardViewModel>(x => { });
         }
 
-        public void StartNewGame()
+        private void StartNewGame()
         {
             gameEngine.StartNewGame();
 
             OnPropertyChanged("Tiles");
             OnPropertyChanged("Players");
         }
+
+        public ICommand StartNewGameCommand { get; private set; }
+
+        public ICommand NextTurnCommand { get; private set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -38,6 +48,46 @@ namespace CodeInvaders.Catan.App
         public void NextTurn()
         {
             gameEngine.NextTurn();
+        }
+    }
+
+    class RelayCommand<T> : ICommand
+    {
+        private readonly Predicate<T> canExecute;
+        private readonly Action<T> execute;
+
+        public RelayCommand(Action<T> action)
+            : this(x => true, action)
+        {
+            execute = action;
+        }
+
+        public RelayCommand(Predicate<T> canExecute, Action<T> execute)
+        {
+            this.canExecute = canExecute;
+            this.execute = execute;
+        }
+
+        public event EventHandler CanExecuteChanged;
+
+        public bool CanExecute(object parameter)
+        {
+            return canExecute((T)parameter);
+        }
+
+        public void UpdateCanExecuteState()
+        {
+            if (CanExecuteChanged != null)
+            {
+                CanExecuteChanged(this, new EventArgs());
+            }
+        }
+
+        public void Execute(object parameter)
+        {
+            execute((T)parameter);
+
+            UpdateCanExecuteState();
         }
     }
 }
