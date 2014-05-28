@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Windows.Input;
 using CodeInvaders.Catan.App.Annotations;
 
 namespace CodeInvaders.Catan.App
@@ -12,8 +10,11 @@ namespace CodeInvaders.Catan.App
     {
         private readonly GameEngine gameEngine;
 
-        public IEnumerable<PlayerViewModel> Players { get { return gameEngine.Players.Select(x => new PlayerViewModel(x)); } }
+        public IEnumerable<PlayerViewModel> Players { get { return gameEngine.Players.Select(x => new PlayerViewModel(x, IsPlayerActive)); } }
+
         public IEnumerable<TileViewModel> Tiles { get { return gameEngine.Tiles.Select(x => new TileViewModel(x)); } }
+
+        public bool IsGameInProgress { get { return gameEngine.IsGameInProgress; } }
 
         public MainBoardViewModel(GameEngine gameEngine)
         {
@@ -21,7 +22,7 @@ namespace CodeInvaders.Catan.App
 
             StartNewGameCommand = new RelayCommand<MainBoardViewModel>(x => StartNewGame());
 
-            NextTurnCommand = new RelayCommand<MainBoardViewModel>(x => { });
+            NextTurnCommand = new RelayCommand<MainBoardViewModel>(x => x.IsGameInProgress, x => NextTurn());
         }
 
         private void StartNewGame()
@@ -30,11 +31,17 @@ namespace CodeInvaders.Catan.App
 
             OnPropertyChanged("Tiles");
             OnPropertyChanged("Players");
+            NextTurnCommand.UpdateCanExecuteState();
         }
 
-        public ICommand StartNewGameCommand { get; private set; }
+        private bool IsPlayerActive(Player player)
+        {
+            return gameEngine.CurrentPlayer == player;
+        }
 
-        public ICommand NextTurnCommand { get; private set; }
+        public RelayCommand<MainBoardViewModel> StartNewGameCommand { get; private set; }
+
+        public RelayCommand<MainBoardViewModel> NextTurnCommand { get; private set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -45,49 +52,11 @@ namespace CodeInvaders.Catan.App
             if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public void NextTurn()
+        private void NextTurn()
         {
             gameEngine.NextTurn();
-        }
-    }
 
-    class RelayCommand<T> : ICommand
-    {
-        private readonly Predicate<T> canExecute;
-        private readonly Action<T> execute;
-
-        public RelayCommand(Action<T> action)
-            : this(x => true, action)
-        {
-            execute = action;
-        }
-
-        public RelayCommand(Predicate<T> canExecute, Action<T> execute)
-        {
-            this.canExecute = canExecute;
-            this.execute = execute;
-        }
-
-        public event EventHandler CanExecuteChanged;
-
-        public bool CanExecute(object parameter)
-        {
-            return canExecute((T)parameter);
-        }
-
-        public void UpdateCanExecuteState()
-        {
-            if (CanExecuteChanged != null)
-            {
-                CanExecuteChanged(this, new EventArgs());
-            }
-        }
-
-        public void Execute(object parameter)
-        {
-            execute((T)parameter);
-
-            UpdateCanExecuteState();
+            OnPropertyChanged("Players");
         }
     }
 }
