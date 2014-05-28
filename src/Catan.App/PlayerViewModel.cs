@@ -7,11 +7,14 @@ namespace CodeInvaders.Catan.App
         private readonly Player player;
         private readonly Func<Player, bool> isActive;
 
-        public int Score { get; set; }
-
         public string Name
         {
             get { return player.Name; }
+        }
+
+        public int Score
+        {
+            get { return player.Score; }
         }
 
         public bool IsActive { get { return isActive(player); } }

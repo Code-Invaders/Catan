@@ -1,10 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace CodeInvaders.Catan
 {
     public class GameEngine
     {
+        Random randomNumber = new Random();
+
         private readonly ITileSetFactory tileSetFactory;
         private IEnumerator<Player> playerTurns;
         
@@ -33,10 +36,13 @@ namespace CodeInvaders.Catan
         public Player CurrentPlayer
         {
             get { return playerTurns.Current; }
+
         }
 
         public void NextTurn()
         {
+            var upscore = randomNumber.Next(0, 3);
+            CurrentPlayer.UpsTheScore(upscore);
             if (!playerTurns.MoveNext())
             {
                 playerTurns.Reset();
