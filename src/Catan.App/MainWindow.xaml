@@ -15,28 +15,10 @@
 
         <app:PlayerControl DataContext="{Binding Players}" ></app:PlayerControl>
         
-        <ItemsControl ItemsSource="{Binding Tiles}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Row="1">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Border BorderBrush="Black" BorderThickness="3">
-                        <Grid Background="{Binding Resource, Converter={StaticResource ResourceKey=ResourceToColorConverter}}" >
-                            <Grid.RowDefinitions>
-                                <RowDefinition />
-                                <RowDefinition />
-                            </Grid.RowDefinitions>
-                            <Label Content="{Binding Resource}" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                            <Label Content="{Binding Path=Chit.IdentifyingNumber}" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1"/>
-                        </Grid>
-                    </Border>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <UniformGrid Columns="4" Rows="5">
-                    </UniformGrid>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-        </ItemsControl>
+        
+        <app:BoardControl DataContext="{Binding Tiles}"/>
+        
+    
         <Button Margin="10" Command="{Binding NextTurnCommand}" CommandParameter="{Binding DataContext,RelativeSource={RelativeSource Self}}">Next turn</Button>
     </StackPanel>
 </Window>

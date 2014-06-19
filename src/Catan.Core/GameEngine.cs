@@ -20,7 +20,7 @@ namespace CodeInvaders.Catan
 
         public void StartNewGame()
         {
-            Tiles = tileSetFactory.CreateTiles(19);
+            Tiles = tileSetFactory.CreateTiles(19).ToArray();
             Players = new[] { new Player("Player 1"), new Player("Player 2"), new Player("Player 3"), new Player("Player 4"), };
             playerTurns = Players.GetEnumerator();
             playerTurns.MoveNext();
