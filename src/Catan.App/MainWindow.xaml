@@ -8,33 +8,13 @@
         d:DataContext="{d:DesignInstance app:MainBoardViewModel}">
     <Window.Resources>
         <app:ResourceToColorConverter x:Key="ResourceToColorConverter"/>
-        <app:ActivePlayerToColorConverter x:Key="ActivePlayerToColorConverter"/>
     </Window.Resources>
     
     <StackPanel Width="931">
         <Button Margin="10" Command="{Binding StartNewGameCommand}" CommandParameter="{Binding DataContext,RelativeSource={RelativeSource Self}}">Start</Button>
 
-        <ItemsControl ItemsSource="{Binding Players}">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Border BorderBrush="{Binding Converter={StaticResource ResourceKey=ActivePlayerToColorConverter}}" BorderThickness="3">
-                        <StackPanel>
-                            <Label HorizontalAlignment="Center" Content="{Binding Name}" />
-                            <VirtualizingStackPanel Orientation="Horizontal">
-                                <Label>Score:</Label>
-                                <Label Content="{Binding Score}"/>
-                            </VirtualizingStackPanel>
-                        </StackPanel>
-                    </Border>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <VirtualizingStackPanel Orientation="Horizontal"/>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-        </ItemsControl>
-
+        <app:PlayerControl DataContext="{Binding Players}" ></app:PlayerControl>
+        
         <ItemsControl ItemsSource="{Binding Tiles}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Row="1">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
