@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App\MainBoardViewModelFixtures\When_switching_players.cs" />
+    <Compile Include="GameEngineFixtures\When_cycling_through_players.cs" />
     <Compile Include="GameEngineFixtures\When_starting_a_new_game.cs" />
     <Compile Include="App\When_converting_Resources_To_colors.cs" />
     <Compile Include="PlayerFixtures\When_increaseing_a_players_score.cs" />

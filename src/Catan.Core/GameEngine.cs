@@ -21,10 +21,27 @@ namespace CodeInvaders.Catan
         public void StartNewGame()
         {
             Tiles = tileSetFactory.CreateTiles(19).ToArray();
-            Players = new[] { new Player("Player 1"), new Player("Player 2"), new Player("Player 3"), new Player("Player 4"), };
+            Players = new[] { CreatePlayer("Player 1"), CreatePlayer("Player 2"), CreatePlayer("Player 3"), CreatePlayer("Player 4"), };
             playerTurns = Players.GetEnumerator();
             playerTurns.MoveNext();
             IsGameInProgress = true;
+        }
+
+        private Player CreatePlayer(string name)
+        {
+            var player = new Player(name);
+
+            player.ScoreIncrease += PlayersScoreIncreases;
+
+            return player;
+        }
+
+        private void PlayersScoreIncreases(object sender, ScoreIncreaseEvent e)
+        {
+            if (e.Score == 10)
+            {
+                WinningPLayer = e.Player;
+            }
         }
 
         public bool IsGameInProgress { get; private set; }
@@ -39,10 +56,15 @@ namespace CodeInvaders.Catan
 
         }
 
+        public Player WinningPLayer { get; private set; }
+
         public void NextTurn()
         {
             var upscore = randomNumber.Next(0, 3);
             CurrentPlayer.UpsTheScore(upscore);
+            
+            //Do some work
+
             if (!playerTurns.MoveNext())
             {
                 playerTurns.Reset();
