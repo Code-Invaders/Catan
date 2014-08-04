@@ -53,10 +53,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="BoardControl.xaml.cs">
-      <DependentUpon>BoardControl.xaml</DependentUpon>
+    <Compile Include="GamePlayControl.xaml.cs">
+      <DependentUpon>GamePlayControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainBoardViewModel.cs" />
+    <Compile Include="BoardLayout.cs" />
+    <Compile Include="GamePlayViewModel.cs" />
     <Compile Include="PlayerControl.xaml.cs">
       <DependentUpon>PlayerControl.xaml</DependentUpon>
     </Compile>
@@ -64,8 +65,9 @@
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="RelayCommand.cs" />
     <Compile Include="ResourceToColorConverter.cs" />
+    <Compile Include="TileControl.cs" />
     <Compile Include="TileViewModel.cs" />
-    <Page Include="BoardControl.xaml">
+    <Page Include="GamePlayControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -6,7 +6,7 @@ using CodeInvaders.Catan.App.Annotations;
 
 namespace CodeInvaders.Catan.App
 {
-    public class MainBoardViewModel : INotifyPropertyChanged
+    public class GamePlayViewModel : INotifyPropertyChanged
     {
         private readonly GameEngine gameEngine;
 
@@ -16,13 +16,13 @@ namespace CodeInvaders.Catan.App
 
         public bool IsGameInProgress { get { return gameEngine.IsGameInProgress; } }
 
-        public MainBoardViewModel(GameEngine gameEngine)
+        public GamePlayViewModel(GameEngine gameEngine)
         {
             this.gameEngine = gameEngine;
 
-            StartNewGameCommand = new RelayCommand<MainBoardViewModel>(x => StartNewGame());
+            StartNewGameCommand = new RelayCommand<GamePlayViewModel>(x => StartNewGame());
 
-            NextTurnCommand = new RelayCommand<MainBoardViewModel>(x => x.IsGameInProgress, x => NextTurn());
+            NextTurnCommand = new RelayCommand<GamePlayViewModel>(x => x.IsGameInProgress, x => NextTurn());
         }
 
         private void StartNewGame()
@@ -39,9 +39,9 @@ namespace CodeInvaders.Catan.App
             return gameEngine.CurrentPlayer == player;
         }
 
-        public RelayCommand<MainBoardViewModel> StartNewGameCommand { get; private set; }
+        public RelayCommand<GamePlayViewModel> StartNewGameCommand { get; private set; }
 
-        public RelayCommand<MainBoardViewModel> NextTurnCommand { get; private set; }
+        public RelayCommand<GamePlayViewModel> NextTurnCommand { get; private set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

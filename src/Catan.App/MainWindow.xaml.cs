@@ -18,7 +18,7 @@ namespace CodeInvaders.Catan.App
         {
             var gameEngine = new GameEngine(new TileSetFactory(new ChitSetFactory()));
 
-            DataContext = new MainBoardViewModel(gameEngine);
+            DataContext = new GamePlayViewModel(gameEngine);
         }
     }
 }

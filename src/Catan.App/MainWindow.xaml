@@ -1,22 +1,18 @@
 ﻿<Window x:Class="CodeInvaders.Catan.App.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="470" Width="941"
+        Title="MainWindow" Height="600" Width="900"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:app="clr-namespace:CodeInvaders.Catan.App" mc:Ignorable="d"
-        d:DataContext="{d:DesignInstance app:MainBoardViewModel}">
-    <Window.Resources>
-        <app:ResourceToColorConverter x:Key="ResourceToColorConverter"/>
-    </Window.Resources>
-    
+        d:DataContext="{d:DesignInstance app:GamePlayViewModel}">
     <StackPanel Width="931">
         <Button Margin="10" Command="{Binding StartNewGameCommand}" CommandParameter="{Binding DataContext,RelativeSource={RelativeSource Self}}">Start</Button>
 
         <app:PlayerControl DataContext="{Binding Players}" ></app:PlayerControl>
         
         
-        <app:BoardControl DataContext="{Binding Tiles}"/>
+        <app:GamePlayControl DataContext="{Binding Tiles}"/>
         
     
         <Button Margin="10" Command="{Binding NextTurnCommand}" CommandParameter="{Binding DataContext,RelativeSource={RelativeSource Self}}">Next turn</Button>
