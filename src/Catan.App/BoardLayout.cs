@@ -34,6 +34,7 @@ namespace CodeInvaders.Catan.App
         public void DrawHexes(IEnumerable<TileViewModel> tiles)
         {
             children.Clear();
+            children.Add(CreateBackground());
             var tileEnumerator = tiles.GetEnumerator();
             for (int col = 0; col < hexCols; col++)
             {
@@ -47,6 +48,17 @@ namespace CodeInvaders.Catan.App
                     var tmpHex = new TileControl(offset.Item1, offset.Item2, HEX_WIDTH, HEX_HEIGHT, tileEnumerator.Current);
                     children.Add(tmpHex);
                 }
+            }
+        }
+
+        private Visual CreateBackground()
+        {
+            var mapBitmap = new DrawingVisual();
+            using (DrawingContext dc = mapBitmap.RenderOpen())
+            {
+                var aRec = new Rect(0, 0, 400, 400);
+                dc.DrawRectangle(Brushes.Blue, new Pen(), aRec);
+                return mapBitmap;
             }
         }
 
